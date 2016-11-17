@@ -1,0 +1,128 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/app-layout/app-box/app-box.html">
+<link rel="import" href="../bower_components/app-layout">
+<link rel="import" href="../bower_components/iron-icons">
+<link rel="import" href="../bower_components/iron-icon">
+<link rel="import" href="../bower_components/app-route/app-location.html">
+<link rel="import" href="../bower_components/app-route/app-route.html">
+<link rel="import" href="../bower_components/iron-pages/iron-pages.html">
+<link rel="import" href="../bower_components/paper-card">
+<link rel="import" href="../bower_components/app-layout/app-scroll-effects/effects/waterfall.html">
+<link rel="import" href="../bower_components/iron-image/iron-image.html">
+<dom-module id="ethan-poly-app">
+    <template>
+        <style>
+            :host {
+                display: block;
+                text-align: center;
+            }
+            #title{
+                background-color:#546E7A;
+                opacity: 0.95;
+                font-size: 30px;
+                font-weight: 200;
+            }
+            #links{
+                background-color:#546E7A;
+                opacity: 0.95;
+                z-index: 1;
+            }
+            #menu-container{
+                width:100%;
+            }
+            iron-pages{
+                width:95%;
+                margin-left:2.5%;
+                margin-top:1%;
+                height:500px;
+            }
+            app-header-layout{
+                color:#ECEFF1;
+                z-index: 1;
+            }
+            a{
+                text-decoration: none;
+                color:#ECEFF1;
+                margin:2em;
+                padding:15px;
+            }
+            .main-content-div{
+                background-image: url('/img/bckgrd.jpeg');
+            }
+            .nav-links:hover{
+                border-bottom: black;
+                border-bottom-width: 5px;
+                border-bottom-style: solid;
+            }
+        </style>
+        <app-location route="{{route}}"></app-location>
+        <app-route
+                route="{{route}}"
+                pattern="/:page"
+                data="{{routeData}}"
+                tail="{{subroute}}"></app-route>
+        <app-header-layout>
+            <app-header fixed shadow condenses effects="waterfall">
+                <app-toolbar id="title">
+                    <div main-title>Ethan Thacker</div>
+                </app-toolbar>
+                <app-toolbar sticky id="links">
+                    <div id="menu-container">
+                        <a class="nav-links" href="/about">About</a>
+                        <a class="nav-links" href="/blog">Blog</a>
+                        <a class="nav-links" href="/projects">Projects</a>
+                        <a class="nav-links" href="/contact">Contact</a>
+                        <a class="nav-links" href="/otherstuff">Other Stuff</a>
+                    </div>
+                </app-toolbar>
+            </app-header>
+        </app-header-layout>
+        <app-box class="main-content-div">
+            <iron-pages
+                    selected="[[page]]"
+                    attr-for-selected="name"
+                    fallback-selection="view404"
+                    role="main">
+                <ethan-about name="about"></ethan-about>
+                <ethan-blog name="blog"></ethan-blog>
+                <ethan-projects name="projects"></ethan-projects>
+                <ethan-contact name="contact"></ethan-contact>
+                <ethan-otherstuff name="otherstuff"></ethan-otherstuff>
+                <ethan-view404 name="view404"></ethan-view404>
+            </iron-pages>
+        </app-box>
+        <div><h6 style="margin:0;">A 2PM Production</h6><iron-image style="width:50px;height:50px; margin:10px" preload sizing="contain" placeholder="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAANwAAADcAQMAAAAhlF3CAAAABlBMVEUAAAAAAAClZ7nPAAAAAXRSTlMAQObYZgAAAAFiS0dEAIgFHUgAAAAJcEhZcwAACxMAAAsTAQCanBgAAAAHdElNRQfgCRUOKimXAA2wAAADsUlEQVRYw+2YPXbcIBDHxaOg5AgcRUeDPB8gR/BRTOdyr6AuZeiiQg+ChFbMB+DdbZLCW9iyfyzMDGiY+U/T9+eff0RKaelBm2FybaZ2ltbBFztflYWl0ILmhHEwa0q+7Ud3Xn3BjcP5gonDyviiEsDQDk9nUQNg6nrZiiBkdN8kgqFvD7MI2UNjP59riZa59n4IVCNG1YOZmSvr6VHMXAXmYqdMAysM9cWA0YqaOwMjBI2uhX9b4guKisG+CGSDwr5I9KfEvig8EYYa22eRowZ7ZtCmzTgmGo2dcTQVWsXifRAoCnQHIRR07y0YLOg5nsEykp43AwxU9KRqADXNPnC0pi8AXMdQKDBc2DsHLPfsBXD8sQ4HkOcdf60QeYboQ32ZKHhyURCuHIYrHoHnsz6skyl+YSDoeQ7dLrs9z3YVOg7jFQ7H83aFraROHnBwyRSPwstI27hJhvAKjG3cmRdsXaiywvA0XM7tCa0Lc4G/n4KhC++GyOYt/TgUZMPPsBVojoXnPF5v+V+uQncfue9ehuqC6oDlLO5vqol96DPUKc+BYDzzWobmS7idMP/c9A6Tt+EgCIpFHdDNIRNLoJMFmgPGO9TliALo0r5sB/7gcNsDPJlg0xuDqsA52I+3DAhcC1zsx+cfAI9XRRdoF/t++0WhCfsGyeTT++03hfNSLkefTLqtBFpfoMvwJ4V79Hc4Jc2gSCWSUWRoCDzinuEqoo7ZOAT1dia6Ftw9yTBOIqqNQrucX5dRrTOBx6nfoyS3DBcEZZoqDBCm09gTHtGCsNyYHVju++z8sa+WwVD82fc1x9mA0/cchOe2lBHZ+cOo1IQ5TDoc21ehaxXn64sQ5YQXoX8afp3ehlnzeSgeyfHT01BWOLyR1hcvus4V+cDlOryWhxe6GZUC7SLikfJjWLjoUT3UqKSGsJZZ7eptpU+N0m5YFDbKyVprDgvRiTeyoIQdVsYzgxZB363GWakuMOx3AKx3kMBz1nUoDGO3JZE0CrDTYW0Q6rZoA4W6LdJ64W7LYl8kWob0grjdw20jaSpx27hPFPE8vtec4rZW4LYWt8C4PT7GRmTBQuQE1Mt70r57ONKRxj9A4YFKBhEsGZkS4eoSG9MwQpUTViZIxSqvBC6NLNeTbyhAly7jWlqNsy05Ro9UHqwPrT39rKEsYU3K9wU0nkR1X1jCFq19Ra9179m+Rgb1rNgTLnvi5WBJ4GlfEG1KjHXettRq+prnPQ49jVZ3Vyx0+5a4/4fPX/zAF+9M8spuAAAAAElFTkSuQmCC"  src="https://storage.googleapis.com/ethangosite.appspot.com/static/img/2pmCR.png"></iron-image></div>
+    </template>
+    <script>
+        Polymer({
+            is: 'ethan-poly-app',
+
+
+            properties: {
+                page: {
+                    type: String,
+                    reflectToAttribute: true,
+                    observer: '_pageChanged'
+                }
+            },
+
+            observers: [
+                '_routePageChanged(routeData.page)'
+            ],
+
+            _routePageChanged: function(page) {
+                this.page = page || 'about';
+            },
+
+            _pageChanged: function(page) {
+                // Load page import on demand. Show 404 page if fails
+                var resolvedPageUrl = this.resolveUrl(page + '.html');
+                this.importHref(resolvedPageUrl, null, this._showPage404, true);
+            },
+
+            _showPage404: function() {
+                this.page = 'view404';
+            }
+        });
+    </script>
+</dom-module>

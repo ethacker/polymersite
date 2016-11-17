@@ -1,0 +1,3 @@
+submitContact = function () {
+
+};

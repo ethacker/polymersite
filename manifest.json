@@ -1,0 +1,7 @@
+{
+  "name": "ethan-poly",
+  "short_name": "ethan-poly",
+  "description": "ethanthacker.com",
+  "start_url": "/",
+  "display": "standalone"
+}

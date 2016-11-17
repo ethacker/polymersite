@@ -1,0 +1,51 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/app-layout/app-box">
+<link rel="import" href="../bower_components/paper-styles">
+<link rel="import" href="styles/shared-styles.html">
+<link rel="import" href="../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../bower_components/paper-input/paper-textarea.html">
+<link rel="import" href="../bower_components/gold-email-input/gold-email-input.html">
+<link rel="import" href="../bower_components/gold-phone-input/gold-phone-input.html">
+<script type="application/javascript" src="js/contact.js"></script>
+<dom-module id="ethan-contact">
+    <template>
+        <style include="shared-styles"></style>
+        <style>
+            :host {
+                display: block;
+                text-align: center;
+            }
+            app-box{
+                height:100%;
+                margin-top:1px;
+                padding:5em;
+            }
+            paper-button{
+                margin-top:2em;
+                background-color:#01579B;
+                color:#ECEFF1;
+            }
+        </style>
+        <app-box class="shadow" id="title-box">
+            <h2>{{contentTitle}}</h2>
+            <paper-input label="Name"></paper-input>
+            <gold-email-input auto-validate></gold-email-input>
+            <paper-textarea label="Message"></paper-textarea>
+            <paper-button raised onclick="submitContact()">Submit</paper-button>
+        </app-box>
+    </template>
+    <script>
+        Polymer({
+
+            is: 'ethan-contact',
+
+            properties: {
+                contentTitle: {
+                    type: String,
+                    value: 'Contact Ethan Here!',
+                },
+            },
+
+        });
+    </script>
+</dom-module>

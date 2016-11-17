@@ -1,0 +1,39 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/app-layout">
+<link rel="import" href="../bower_components/paper-styles">
+<link rel="import" href="styles/shared-styles.html">
+
+<dom-module id="ethan-view404">
+    <template>
+        <style include="shared-styles"></style>
+        <style>
+            :host {
+                display: block;
+                text-align: center;
+            }
+            app-box{
+                height:100%;
+                margin-top:1px;
+                padding:2em;
+            }
+        </style>
+        <app-box class="shadow" id="title-box">
+            <h2>{{contentTitle}}</h2>
+        </app-box>
+    </template>
+
+    <script>
+        Polymer({
+
+            is: 'ethan-view404',
+
+            properties: {
+                contentTitle: {
+                    type: String,
+                    value: 'No Page Found to Match that Address!',
+                },
+            },
+
+        });
+    </script>
+</dom-module>
