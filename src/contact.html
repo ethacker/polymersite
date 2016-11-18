@@ -28,10 +28,10 @@
         </style>
         <app-box class="shadow" id="title-box">
             <h2>{{contentTitle}}</h2>
-            <paper-input label="Name"></paper-input>
-            <gold-email-input auto-validate></gold-email-input>
-            <paper-textarea label="Message"></paper-textarea>
-            <paper-button raised onclick="submitContact()">Submit</paper-button>
+            <paper-input id="name" label="Name"></paper-input>
+            <gold-email-input id="email" auto-validate></gold-email-input>
+            <paper-textarea id="message" label="Message"></paper-textarea>
+            <paper-button raised onclick="ethan.contact.submitContact()">Submit</paper-button>
         </app-box>
     </template>
     <script>
