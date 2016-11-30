@@ -7,10 +7,13 @@
 <link rel="import" href="../bower_components/app-route/app-route.html">
 <link rel="import" href="../bower_components/iron-pages/iron-pages.html">
 <link rel="import" href="../bower_components/paper-card">
+<link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
 <link rel="import" href="../bower_components/app-layout/app-scroll-effects/effects/waterfall.html">
 <link rel="import" href="../bower_components/iron-image/iron-image.html">
 <link rel="import" href="../bower_components/app-layout/app-drawer/app-drawer.html">
 <link rel="import" href="../bower_components/app-layout/app-drawer-layout/app-drawer-layout.html">
+<link rel="import" href="../bower_components/app-layout/app-header-layout/app-header-layout.html">
+<link rel="import" href="../bower_components/app-layout/app-header/app-header.html">
 <dom-module id="ethan-poly-app-mobile">
     <template>
         <style include="shared-styles"></style>
@@ -19,7 +22,18 @@
                 text-align: center;
                 --app-drawer-content-container:{
                     background-color:#546E7A;
-                }
+                    padding-top:116px;
+                };
+                --app-drawer-width:212px;
+            }
+            #title{
+                background-color:#546E7A;
+                opacity: 0.95;
+                font-size: 30px;
+                font-weight: 200;
+            }
+            #menu-container{
+                width:100%;
             }
             app-box{
                 height:100%;
@@ -28,18 +42,71 @@
             }
             .nav-links{
                 display: block;
-                width: 100%;
-                margin-top: 15%;
+                width: 70%;
                 text-decoration: none;
-                font-size: 2em;
+                font-size: 1.5em;
                 color:#ECEFF1;
-
+                padding: 15%;
+                -webkit-transition: background-color 2s ease-out;
+                -moz-transition: background-color 2s ease-out;
+                -o-transition: background-color 2s ease-out;
+                transition: background-color 2s ease-out;
+            }
+            .nav-links:hover{
+                background-color: #263238;
             }
             app-drawer{
                 border-right:1px;
                 border-left: 0;
                 border-style: solid;
                 border-color: gainsboro;
+                display:none;
+            }
+            app-header{
+
+            }
+            .nav-link-header{
+                text-decoration: none;
+                color:#ECEFF1;
+                margin:2em;
+                padding:14px;
+            }
+            .nav-link-header{
+                -webkit-transition: all 0.5s ease-out;
+                -moz-transition: all 0.5s ease-out;
+                -o-transition: all 0.5s ease-out;
+                transition: all 0.5s ease-out;
+            }
+            .nav-link-header:hover{
+                border-bottom-color: black;
+                border-bottom-width: 6px;
+                border-bottom-style: solid;
+            }
+            #links{
+                background-color:#546E7A;
+                opacity: 0.95;
+                z-index: 1;
+            }
+            paper-icon-button{
+                display:none;
+            }
+            @media only screen and (max-width: 950px){
+                #links{
+                    height: 0;
+                    width:0;
+                }
+                #menu-container{
+                    display:none;
+                }
+                .nav-link-header{
+                    display:none;
+                }
+                app-drawer{
+                    display:block;
+                }
+                paper-icon-button{
+                    display:block;
+                }
             }
         </style>
         <app-location route="{{route}}"></app-location>
@@ -48,33 +115,49 @@
                 pattern="/:page"
                 data="{{routeData}}"
                 tail="{{subroute}}"></app-route>
-        <app-drawer-layout fullbleed>
-                <app-drawer>
-                    <a class="nav-links" href="/about">About</a>
-                    <a class="nav-links" href="/blog">Blog</a>
-                    <a class="nav-links" href="/projects">Projects</a>
-                    <a class="nav-links" href="/contact">Contact</a>
-                    <a class="nav-links" href="/otherstuff">Other Stuff</a>
-                </app-drawer>
-            <app-box class="main-content-div">
-                <iron-pages
-                        selected="[[page]]"
-                        attr-for-selected="name"
-                        fallback-selection="view404"
-                        role="main">
-                    <ethan-about name="about"></ethan-about>
-                    <ethan-blog name="blog"></ethan-blog>
-                    <ethan-projects name="projects"></ethan-projects>
-                    <ethan-contact name="contact"></ethan-contact>
-                    <ethan-otherstuff name="otherstuff"></ethan-otherstuff>
-                    <ethan-view404 name="view404"></ethan-view404>
-                </iron-pages>
-            </app-box>
+        <app-drawer-layout force-Narrow fullbleed>
+            <app-drawer>
+                <a class="nav-links" href="/about">About</a>
+                <a class="nav-links" href="/blog">Blog</a>
+                <a class="nav-links" href="/projects">Projects</a>
+                <a class="nav-links" href="/contact">Contact</a>
+                <a class="nav-links" href="/otherstuff">Other Stuff</a>
+            </app-drawer>
+            <app-header-layout>
+                <app-header fixed shadow condenses effects="waterfall">
+                    <app-toolbar id="title">
+                        <paper-icon-button onclick="document.querySelector('app-drawer').toggle()" icon="menu"></paper-icon-button>
+                        <div main-title>Ethan Thacker</div>
+                    </app-toolbar>
+                    <app-toolbar sticky id="links">
+                        <div id="menu-container">
+                            <a class="nav-link-header" href="/about">About</a>
+                            <a class="nav-link-header" href="/blog">Blog</a>
+                            <a class="nav-link-header" href="/projects">Projects</a>
+                            <a class="nav-link-header" href="/contact">Contact</a>
+                            <a class="nav-link-header" href="/otherstuff">Other Stuff</a>
+                        </div>
+                    </app-toolbar>
+                </app-header>
+                <app-box class="main-content-box" style="height:5000px;">
+                    <iron-pages
+                            selected="[[page]]"
+                            attr-for-selected="name"
+                            fallback-selection="view404"
+                            role="main">
+                        <ethan-about name="about"></ethan-about>
+                        <ethan-blog name="blog"></ethan-blog>
+                        <ethan-projects name="projects"></ethan-projects>
+                        <ethan-contact name="contact"></ethan-contact>
+                        <ethan-otherstuff name="otherstuff"></ethan-otherstuff>
+                        <ethan-view404 name="view404"></ethan-view404>
+                    </iron-pages>
+                </app-box>
+            </app-header-layout>
         </app-drawer-layout>
     </template>
     <script>
         Polymer({
-
             is: 'ethan-poly-app-mobile',
             properties: {
                 page: {

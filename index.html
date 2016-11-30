@@ -15,23 +15,13 @@
     <script src="https://www.gstatic.com/firebasejs/3.5.2/firebase.js"></script>
     <script src="src/js/global.js"></script>
     <script>
-        $(document).ready(ethan.app.initPage());
+        $(window).load(ethan.app.initPage());
     </script>
     <style>
-      @media only screen and (min-width: 940px){
-        ethan-poly-app-mobile{
-          display:none;
-        }
-      }
-      @media only screen and (max-width: 939px){
-        ethan-poly-app{
-          display:none;
-        }
-      }
+
     </style>
   </head>
   <body>
-    <ethan-poly-app></ethan-poly-app>
     <ethan-poly-app-mobile></ethan-poly-app-mobile>
   </body>
 </html>
