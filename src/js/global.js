@@ -11,5 +11,6 @@ ethan.app = {
        };
        firebase.initializeApp(config);
        ethan.app.database = firebase.database();
+       document.querySelector('app-drawer-layout').responsiveWidth="800px";
    }
 };

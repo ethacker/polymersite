@@ -3,14 +3,20 @@ ethan = ethan || {};
 
 ethan.contact = {
     submitContact : function() {
-        ethan.app.database.ref('contacts').push({
-            name: $('#name').val(),
-            email: $('#email').val(),
-            message: $('#message').val()
-        });
+        var name = $('#name');
+        var email = document.querySelector('gold-email-input');
+        var message = $('#message');
 
-        $('#name').val('');
-        $('#email').val('');
-        $('#message').val('');
+        if(name.val()!=''&&email.validate()){
+            ethan.app.database.ref('contacts').push({
+                name: $('#name').val(),
+                email: $('#email').val(),
+                message: $('#message').val()
+            });
+            name.val('');
+            $('#email').val('');
+            message.val('');
+        }
+
     }
 };

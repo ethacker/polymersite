@@ -1,0 +1,105 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/app-layout/app-box/app-box.html">
+<link rel="import" href="../bower_components/app-layout">
+<link rel="import" href="../bower_components/iron-icons">
+<link rel="import" href="../bower_components/iron-icon">
+<link rel="import" href="../bower_components/app-route/app-location.html">
+<link rel="import" href="../bower_components/app-route/app-route.html">
+<link rel="import" href="../bower_components/iron-pages/iron-pages.html">
+<link rel="import" href="../bower_components/paper-card">
+<link rel="import" href="../bower_components/app-layout/app-scroll-effects/effects/waterfall.html">
+<link rel="import" href="../bower_components/iron-image/iron-image.html">
+<link rel="import" href="../bower_components/app-layout/app-drawer/app-drawer.html">
+<link rel="import" href="../bower_components/app-layout/app-drawer-layout/app-drawer-layout.html">
+<dom-module id="ethan-poly-app-mobile">
+    <template>
+        <style include="shared-styles"></style>
+        <style>
+            :host {
+                text-align: center;
+                --app-drawer-content-container:{
+                    background-color:#546E7A;
+                }
+            }
+            app-box{
+                height:100%;
+                margin-top:1px;
+                padding:2em;
+            }
+            .nav-links{
+                display: block;
+                width: 100%;
+                margin-top: 15%;
+                text-decoration: none;
+                font-size: 2em;
+                color:#ECEFF1;
+
+            }
+            app-drawer{
+                border-right:1px;
+                border-left: 0;
+                border-style: solid;
+                border-color: gainsboro;
+            }
+        </style>
+        <app-location route="{{route}}"></app-location>
+        <app-route
+                route="{{route}}"
+                pattern="/:page"
+                data="{{routeData}}"
+                tail="{{subroute}}"></app-route>
+        <app-drawer-layout fullbleed>
+                <app-drawer>
+                    <a class="nav-links" href="/about">About</a>
+                    <a class="nav-links" href="/blog">Blog</a>
+                    <a class="nav-links" href="/projects">Projects</a>
+                    <a class="nav-links" href="/contact">Contact</a>
+                    <a class="nav-links" href="/otherstuff">Other Stuff</a>
+                </app-drawer>
+            <app-box class="main-content-div">
+                <iron-pages
+                        selected="[[page]]"
+                        attr-for-selected="name"
+                        fallback-selection="view404"
+                        role="main">
+                    <ethan-about name="about"></ethan-about>
+                    <ethan-blog name="blog"></ethan-blog>
+                    <ethan-projects name="projects"></ethan-projects>
+                    <ethan-contact name="contact"></ethan-contact>
+                    <ethan-otherstuff name="otherstuff"></ethan-otherstuff>
+                    <ethan-view404 name="view404"></ethan-view404>
+                </iron-pages>
+            </app-box>
+        </app-drawer-layout>
+    </template>
+    <script>
+        Polymer({
+
+            is: 'ethan-poly-app-mobile',
+            properties: {
+                page: {
+                    type: String,
+                    reflectToAttribute: true,
+                    observer: '_pageChanged'
+                }
+            },
+
+            observers: [
+                '_routePageChanged(routeData.page)'
+            ],
+            _routePageChanged: function(page) {
+                this.page = page || 'about';
+            },
+
+            _pageChanged: function(page) {
+                // Load page import on demand. Show 404 page if fails
+                var resolvedPageUrl = this.resolveUrl(page + '.html');
+                this.importHref(resolvedPageUrl, null, this._showPage404, true);
+            },
+
+            _showPage404: function() {
+                this.page = 'view404';
+            }
+        });
+    </script>
+</dom-module>
