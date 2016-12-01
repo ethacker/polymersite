@@ -21,13 +21,16 @@
             :host {
                 text-align: center;
                 --app-drawer-content-container:{
-                    background-color:#546E7A;
+                    background-color:#607D8B;
                     padding-top:116px;
                 };
                 --app-drawer-width:212px;
             }
+            #page-title-div{
+                color:#FFFFFF;
+            }
             #title{
-                background-color:#546E7A;
+                background-color:#607D8B;
                 opacity: 0.95;
                 font-size: 30px;
                 font-weight: 200;
@@ -45,7 +48,7 @@
                 width: 70%;
                 text-decoration: none;
                 font-size: 1.5em;
-                color:#ECEFF1;
+                color:#FFFFFF;
                 padding: 15%;
                 -webkit-transition: background-color 2s ease-out;
                 -moz-transition: background-color 2s ease-out;
@@ -67,7 +70,7 @@
             }
             .nav-link-header{
                 text-decoration: none;
-                color:#ECEFF1;
+                color:#FFFFFF;
                 margin:2em;
                 padding:14px;
             }
@@ -77,13 +80,14 @@
                 -o-transition: all 0.5s ease-out;
                 transition: all 0.5s ease-out;
             }
-            .nav-link-header:hover{
+            .nav-link-header:hover {
                 border-bottom-color: black;
                 border-bottom-width: 6px;
                 border-bottom-style: solid;
+                font-weight: 900;
             }
             #links{
-                background-color:#546E7A;
+                background-color:#607D8B;
                 opacity: 0.95;
                 z-index: 1;
             }
@@ -127,7 +131,7 @@
                 <app-header fixed shadow condenses effects="waterfall">
                     <app-toolbar id="title">
                         <paper-icon-button onclick="document.querySelector('app-drawer').toggle()" icon="menu"></paper-icon-button>
-                        <div main-title>Ethan Thacker</div>
+                        <div id="page-title-div" main-title>Ethan Thacker</div>
                     </app-toolbar>
                     <app-toolbar sticky id="links">
                         <div id="menu-container">
@@ -179,7 +183,6 @@
                 var resolvedPageUrl = this.resolveUrl(page + '.html');
                 this.importHref(resolvedPageUrl, null, this._showPage404, true);
             },
-
             _showPage404: function() {
                 this.page = 'view404';
             }
